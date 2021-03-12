@@ -1,0 +1,84 @@
+_schema-version: "3.2"
+ID: FioriPedidos
+version: 0.0.1
+modules:
+- name: FioriPedidos-destination-content
+  type: com.sap.application.content
+  requires:
+  - name: FioriPedidos-destination-service
+    parameters:
+      content-target: true
+  - name: FioriPedidos_html_repo_host
+    parameters:
+      service-key:
+        name: FioriPedidos_html_repo_host-key
+  - name: uaa_FioriPedidos
+    parameters:
+      service-key:
+        name: uaa_FioriPedidos-key
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: bs_FioriPedidos_html_repo_host
+          ServiceInstanceName: FioriPedidos-html5-app-host-service
+          ServiceKeyName: FioriPedidos_html_repo_host-key
+          sap.cloud.service: bs
+        - Authentication: OAuth2UserTokenExchange
+          Name: bs_uaa_FioriPedidos
+          ServiceInstanceName: FioriPedidos-xsuaa-service
+          ServiceKeyName: uaa_FioriPedidos-key
+          sap.cloud.service: bs
+        existing_destinations_policy: ignore
+  build-parameters:
+    no-source: true
+- name: FioriPedidos_ui_deployer
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: FioriPedidos_html_repo_host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - FioriPedidosHTML5Module-content.zip
+      name: FioriPedidosHTML5Module
+      target-path: resources/
+- name: FioriPedidosHTML5Module
+  type: html5
+  path: FioriPedidosHTML5Module
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+resources:
+- name: FioriPedidos-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      version: 1.0.0
+    service: destination
+    service-name: FioriPedidos-destination-service
+    service-plan: lite
+- name: FioriPedidos_html_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: FioriPedidos-html5-app-host-service
+    service-plan: app-host
+- name: uaa_FioriPedidos
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: FioriPedidos-xsuaa-service
+    service-plan: application
+build-parameters:
+  before-all:
+  - builder: custom
+    commands:
+    - npm install

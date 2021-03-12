@@ -1,0 +1,7 @@
+/node_modules/
+/dist/
+
+# auto generated wildcard
+FioriPedidos/FioriPedidosHTML5Module/.env1
+# auto generated wildcard
+FioriPedidosHTML5Module/.env2

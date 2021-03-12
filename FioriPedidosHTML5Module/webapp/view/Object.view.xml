@@ -1,0 +1,43 @@
+<mvc:View xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.f.semantic" xmlns:form="sap.ui.layout.form" controllerName="ns.FioriPedidosHTML5Module.controller.Object">
+
+	<semantic:SemanticPage id="page" headerPinnable="false" toggleHeaderOnTitleClick="false" busy="{objectView>/busy}" busyIndicatorDelay="{objectView>/delay}">
+
+		<semantic:titleHeading>
+			<Title text="{PoNumber}" level="H2"/>
+		</semantic:titleHeading>
+
+		<semantic:sendEmailAction>
+			<semantic:SendEmailAction id="shareEmail" press=".onShareEmailPress"/>
+		</semantic:sendEmailAction>
+ 
+    <semantic:content>
+        <Panel class="sapUiNoContentPadding" headerText="Cabeçalho Pedido">
+            <content>
+                <form:SimpleForm minWidth="1024" maxContainerCols="2" editable="false" layout="ResponsiveGridLayout" labelSpanL="3" labelSpanM="3" emptySpanL="4" emptySpanM="4" columnsL="1" columnsM="1">
+                    <form:content>
+                        <Label text="Tipo Documento"/>
+                        <Text xmlns:cd="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" text="{DocType}" cd:w5g.dt.context="/ListPurchaseOrderHeader"/>
+                        <Label text="Org. Compras"/>
+                        <Text xmlns:cd="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" text="{PurchOrg}" cd:w5g.dt.context="/ListPurchaseOrderHeader"/>
+                        <Label text="Empresa"/>
+                        <Text xmlns:cd="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" text="{CoCode}" cd:w5g.dt.context="/ListPurchaseOrderHeader"/>
+                        <Label text="Fornecedor"/>
+                        <Text xmlns:cd="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" text="{Vendor} - {VendName}" cd:w5g.dt.context="/ListPurchaseOrderHeader"/>
+                        <Label text="Condição Pagamento"/>
+                        <Text xmlns:cd="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" text="{Pmnttrms}" cd:w5g.dt.context="/ListPurchaseOrderHeader"/>
+                        <Label text="Vendedor"/>
+                        <Text xmlns:cd="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" text="{VendName}" cd:w5g.dt.context="/ListPurchaseOrderHeader"/>
+                        <Label text="Contrato"/>
+                        <Text xmlns:cd="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" text="{Agreement}" cd:w5g.dt.context="/ListPurchaseOrderHeader"/>
+                        <Label text="Moeda"/>
+                        <Text xmlns:cd="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" text="{Currency}" cd:w5g.dt.context="/ListPurchaseOrderHeader"/>
+                    </form:content>
+                </form:SimpleForm>
+            </content>
+        </Panel>
+
+    </semantic:content>
+
+	</semantic:SemanticPage>
+
+</mvc:View>

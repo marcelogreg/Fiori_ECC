@@ -1,0 +1,8 @@
+/mta_archives/
+/node_modules/
+/resources/
+
+# auto generated wildcard
+FioriPedidos/FioriPedidosHTML5Module/.env1
+# auto generated wildcard
+FioriPedidosHTML5Module/.env2
